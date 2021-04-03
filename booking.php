@@ -1,13 +1,13 @@
-<?php $title="Booking";?>
-<?php include "./template/header.html";?>
-<?php include "./add_booking.php";?>
+<?php $title = "Booking"; ?>
+<?php include "./template/header.html"; ?>
+<?php include "./add_booking.php"; ?>
 
-<?php $flage=false; ?>
+<?php $flage = false; ?>
 
 
 <?php
 //  Errors massage
-    $Errors_massage=array('name'=>'','phone'=>'','check-in'=>'','check-out'=>'');
+$Errors_massage = array('name' => '', 'phone' => '', 'check-in' => '', 'check-out' => '');
 ?>
 
 
@@ -16,24 +16,24 @@
 //  Take the request the handle it
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //handle the error
-    $data=booking_request($_POST);
+    $data = booking_request($_POST);
 
     // display massage if the any error
-    if ($data != 'true' && $data['name'] == false){
+    if ($data != 'true' && $data['name'] == false) {
         $Errors_massage['name'] = 'Name input is not valid';
     }
-    if ($data != 'true' && $data['phone'] == false){
+    if ($data != 'true' && $data['phone'] == false) {
         $Errors_massage['phone'] = 'Phone input is not valid';
     }
-    if ($data != 'true' && $data['check-in'] == false){
+    if ($data != 'true' && $data['check-in'] == false) {
         $Errors_massage['check-in'] = 'Check-in input is not valid';
     }
-    if ($data != 'true' && $data['check-out'] == false){
+    if ($data != 'true' && $data['check-out'] == false) {
         $Errors_massage['check-out'] = 'Check-out input is not valid';
     }
-    if ($data=='true'){
-        $flage=true;
-        $Errors_massage['name']=$Errors_massage['phone']=$Errors_massage['check-in']=$Errors_massage['check-out']='';
+    if ($data == 'true') {
+        $flage = true;
+        $Errors_massage['name'] = $Errors_massage['phone'] = $Errors_massage['check-in'] = $Errors_massage['check-out'] = '';
     }
 }
 ?>
@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <section id="contact-form" class="py-3">
     <div class="container">
         <?php if ($flage) { ?>
-        <div class="alert-success" style="margin-bottom: 10px">
-            <strong>Success!</strong> Your reservation is confirmed.
-        </div>
+            <div class="alert-success" style="margin-bottom: 10px">
+                <strong>Success!</strong> Your reservation is confirmed.
+            </div>
         <?php } ?>
         <h1 class="l-heading">
             <span class="text-primary">Booking</span>
@@ -78,8 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </section>
-
-
 
 
 <?php include "template/footer.html" ?>

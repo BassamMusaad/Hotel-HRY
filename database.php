@@ -2,21 +2,20 @@
 
 function get_database_connection(){
 
-    // connection info.
-    $database_info = [
-        'host_ip' => '127.0.0.1',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'hry'
-    ];
 
-    // database connection object.
-    $database_conn = new mysqli($database_info['host_ip'], $database_info['username'],
-        $database_info['password'], $database_info['database']);
+    //Get Heroku ClearDB connection information
+    $cleardb_url = 'mysql://b6983a03d950c7:990c3567@us-cdbr-east-03.cleardb.com/heroku_84286c27b59354c?reconnect=true';
+    $cleardb_server = 'us-cdbr-east-03.cleardb.com';
+    $cleardb_username = 'b6983a03d950c7';
+    $cleardb_password = '990c3567';
+    $cleardb_db = 'heroku_84286c27b59354c';
 
-    // check if the are any error in the connection.
-    if ($database_conn->connect_errno) {
-        die('The are some issue on connection of database : ' . $database_conn->connect_error);
+    // Connect to DB
+    $database_conn = new mysqli($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+
+    // check if the any error in connection.
+    if ($database_conn->connect_errno){
+        die('The are some issue on connection of database : '.$database_conn->connect_error);
     }
 
     // return connection object.
