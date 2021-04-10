@@ -4,7 +4,6 @@ function get_database_connection(){
 
 
     //Get Heroku ClearDB connection information
-    $cleardb_url = 'mysql://b6983a03d950c7:990c3567@us-cdbr-east-03.cleardb.com/heroku_84286c27b59354c?reconnect=true';
     $cleardb_server = 'us-cdbr-east-03.cleardb.com';
     $cleardb_username = 'b6983a03d950c7';
     $cleardb_password = '990c3567';
