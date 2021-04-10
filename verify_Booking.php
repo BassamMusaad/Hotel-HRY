@@ -55,14 +55,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $Errors_massage['check-in'] = 'There is no reservation at this date.';
         }
     }
-
+    // get the input from the user
     $phone=$data['phone'];
     $check_in=$data['check-in'];
 
     // connect to database
     $database_conn=get_database_connection();
-    // select statement.
-    $query_result=$database_conn->query("SELECT * FROM booking WHERE phone='" . $phone . "' AND " . " check_in='". $check_in ."'")->fetch_all(MYSQLI_ASSOC);
+    // start prepared statement.
+    $stmt =$database_conn->prepare("SELECT * FROM booking WHERE phone=? AND check_in= ?");
+    // bind and execute
+    $stmt->bind_param('is',$phone,$check_in);
+    $stmt->execute();
+    // getting the result.
+    $query_result=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $database_conn->close();
 }
 ?>
@@ -77,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <div class="container-fluid">
     <div class="row">
     <?php
-        $num_of_column=1;
         foreach ($query_result as $result){
     ?>
        <div class="card container" style="width: 18rem; border: #f7c08a solid 6px">
@@ -101,8 +105,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <?php include "template/footer.html" ?>
 

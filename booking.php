@@ -19,19 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = booking_request($_POST);
 
     // display massage if the any error
-    if ($data != 'true' && $data['name'] == false) {
+    if ($data != true && $data['name'] == false) {
         $Errors_massage['name'] = 'Name input is not valid';
     }
-    if ($data != 'true' && $data['phone'] == false) {
+    if ($data != true && $data['phone'] == false) {
         $Errors_massage['phone'] = 'Phone input is not valid';
     }
-    if ($data != 'true' && $data['check-in'] == false) {
+    if ($data != true && $data['check-in'] == false) {
         $Errors_massage['check-in'] = 'Check-in input is not valid';
     }
-    if ($data != 'true' && $data['check-out'] == false) {
+    if ($data != true && $data['check-out'] == false) {
         $Errors_massage['check-out'] = 'Check-out input is not valid';
     }
-    if ($data == 'true') {
+    if ($data == true) {
         $flage = true;
         $Errors_massage['name'] = $Errors_massage['phone'] = $Errors_massage['check-in'] = $Errors_massage['check-out'] = '';
     }

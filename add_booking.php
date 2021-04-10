@@ -30,7 +30,7 @@ function booking_request($request){
         $stmt->bind_param('siss',$name,$phone,$check_in,$check_out);
         $stmt->execute();
         $database_conn->close();
-        return 'true';
+        return true;
     }
 
 }
